@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tzohar Android Installer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Tzohar Android Installer</h1>
+    <p class="sub">Set up the Tzohar agent on a plugged-in Android phone.</p>
+  </header>
+
+  <main>
+    <!-- Step 1: enrollment -->
+    <section class="card" id="card-enroll">
+      <div class="card-head"><span class="num">1</span><h2>Enrollment</h2><span class="badge" id="enroll-badge">needed</span></div>
+      <p class="hint">Paste the enrollment link from your dashboard (or the 16-character install key).</p>
+      <div class="row">
+        <input type="text" id="enroll-input" placeholder="https://api.tzohar.tech/install/enr_… or install key" autocomplete="off" spellcheck="false" />
+        <button id="enroll-btn">Load</button>
+      </div>
+      <p class="err" id="enroll-err"></p>
+      <p class="ok" id="enroll-ok"></p>
+    </section>
+
+    <!-- Step 2: device -->
+    <section class="card" id="card-device">
+      <div class="card-head"><span class="num">2</span><h2>Connect the phone</h2><span class="badge" id="device-badge">waiting</span></div>
+      <div id="device-status"></div>
+      <details class="help">
+        <summary>How to turn on USB debugging</summary>
+        <ol>
+          <li>On the phone: <b>Settings → About phone</b> and tap <b>Build number</b> seven times.</li>
+          <li>Go to <b>Settings → System → Developer options</b> and switch on <b>USB debugging</b>.</li>
+          <li>Plug the phone into this PC with a USB cable.</li>
+          <li>When the phone asks <b>Allow USB debugging?</b>, tick <b>Always allow</b> and tap <b>Allow</b>.</li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- Step 3: install -->
+    <section class="card" id="card-run">
+      <div class="card-head"><span class="num">3</span><h2>Install &amp; set up</h2><span class="badge" id="run-badge">ready</span></div>
+      <p class="hint">Downloads the latest app, installs it, enables the accessibility service, exempts it from battery optimization, and hands it the install key — all automatically.</p>
+      <button id="run-btn" disabled>Install on this phone</button>
+      <ul class="steps" id="steps"></ul>
+      <div class="done-banner" id="done-banner" hidden>
+        ✅ Setup complete. The device should appear on your Tzohar dashboard within a minute.
+        <span id="done-note"></span>
+      </div>
+    </section>
+
+    <section class="card log-card">
+      <div class="card-head"><h2>Activity log</h2></div>
+      <pre id="log"></pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
