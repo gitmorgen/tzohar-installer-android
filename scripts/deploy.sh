@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Publish the installer .exe to the backend downloads dir so it is served at
-# /downloads/tzohar-android-installer.exe (a stable alias humans download) plus
+# /downloads/tzohar-installer-android.exe (a stable alias humans download) plus
 # a versioned archival copy. The installer is self-contained and does not
 # self-update, so there is no manifest to publish (unlike the agents).
 #
@@ -13,8 +13,8 @@ ROOT="$(dirname "$SCRIPT_DIR")"
 VPS="${TZOHAR_VPS:-tzohar-prod}"
 REMOTE_DOWNLOADS="/root/tzohar/backend/downloads"
 VERSION="$(tr -d '[:space:]' < "$ROOT/VERSION")"
-STABLE="tzohar-android-installer.exe"
-VERSIONED="tzohar-android-installer_${VERSION}.exe"
+STABLE="tzohar-installer-android.exe"
+VERSIONED="tzohar-installer-android_${VERSION}.exe"
 
 if [ "${1:-}" = "--prebuilt" ] && [ -n "${2:-}" ]; then
   EXE="$(cd "$(dirname "$2")" && pwd)/$(basename "$2")"

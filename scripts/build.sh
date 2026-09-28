@@ -9,8 +9,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$ROOT"
 VERSION="$(tr -d '[:space:]' < VERSION)"
-OUT="${1:-$ROOT/tzohar-android-installer.exe}"
-echo "Building tzohar-android-installer $VERSION -> $OUT (windows/amd64)"
+OUT="${1:-$ROOT/tzohar-installer-android.exe}"
+echo "Building tzohar-installer-android $VERSION -> $OUT (windows/amd64)"
 GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -trimpath \
   -ldflags "-s -w -X main.version=$VERSION" -o "$OUT" .
 echo "Built: $OUT"

@@ -1,4 +1,4 @@
-// Command tzohar-android-installer is a Windows helper that sideloads and sets
+// Command tzohar-installer-android is a Windows helper that sideloads and sets
 // up the Tzohar Android agent on a plugged-in phone over ADB, walking the
 // technician through only the steps Android will not let software do for it
 // (turning on USB debugging, accepting the debugging prompt).
@@ -27,9 +27,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gitmorgen/tzohar-android-installer/internal/adb"
-	"github.com/gitmorgen/tzohar-android-installer/internal/apk"
-	"github.com/gitmorgen/tzohar-android-installer/internal/enroll"
+	"github.com/gitmorgen/tzohar-installer-android/internal/adb"
+	"github.com/gitmorgen/tzohar-installer-android/internal/apk"
+	"github.com/gitmorgen/tzohar-installer-android/internal/enroll"
 )
 
 //go:embed web

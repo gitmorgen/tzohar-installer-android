@@ -1,3 +1,3 @@
-module github.com/gitmorgen/tzohar-android-installer
+module github.com/gitmorgen/tzohar-installer-android
 
 go 1.21

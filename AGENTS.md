@@ -1,4 +1,4 @@
-# Agent notes — tzohar-android-installer
+# Agent notes — tzohar-installer-android
 
 Windows helper that sideloads + sets up the Tzohar Android agent on a
 plugged-in phone over ADB. Go, no external dependencies (stdlib only), one
@@ -13,7 +13,7 @@ self-contained `.exe`.
   with Go.
 - `scripts/build.sh` → the exe. `scripts/deploy.sh [--prebuilt FILE.exe]`
   publishes to `tzohar-prod:/root/tzohar/backend/downloads/` as the stable
-  alias `tzohar-android-installer.exe` (+ a versioned copy). `.exe` is already
+  alias `tzohar-installer-android.exe` (+ a versioned copy). `.exe` is already
   an allowed download extension in `tzohar-backend/src/routes/downloads.js`.
 - Bump `VERSION` when you cut a release; it's stamped into the binary and the
   versioned filename.
@@ -40,6 +40,11 @@ self-contained `.exe`.
   isn't greyed out. Keep the `-g`.
 - The install-key deep link must be sent as a **single quoted device-shell
   line** (`ShellLine`), or the device's `sh` globs the `?` in the URI.
-- The installer is **unsigned** → SmartScreen/AV friction, same as the Windows
-  agent (see the SAC/signing history). Not a bug.
+- The installer is Authenticode-signed with the **Tzohar publisher cert**, the
+  same `tzohar-app-windows/scripts/sign.ps1` + `TZOHAR_SIGN_*` env the agent
+  uses; `release.sh`'s `build_installer` signs it on the laptop after the
+  cross-compile (Set-AuthenticodeSignature needs no SDK and doesn't run the exe,
+  so SAC doesn't block signing). Self-signed → still an "unknown publisher"
+  SmartScreen warning until the tech trusts the cert, and never passes SAC. The
+  site's Windows-install steps carry the same trust command.
 - Set git identity repo-locally (`gitmorgen`) — new repos start with none.

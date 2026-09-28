@@ -1,4 +1,4 @@
-# tzohar-android-installer
+# tzohar-installer-android
 
 A Windows helper that sets up the **Tzohar Android agent** on a plugged-in
 phone with as few taps as possible. It's a single self-contained `.exe` that
@@ -32,18 +32,23 @@ No Windows build path is needed: it cross-compiles from any box with Go
 (the Linux build box — see `tzohar-specs/infra.md` §4).
 
 ```bash
-scripts/build.sh                      # -> tzohar-android-installer.exe (windows/amd64)
+scripts/build.sh                      # -> tzohar-installer-android.exe (windows/amd64)
 scripts/deploy.sh                     # build here, then publish to the backend
 scripts/deploy.sh --prebuilt X.exe    # publish an exe built elsewhere
 ```
 
-`deploy.sh` uploads the stable alias `tzohar-android-installer.exe` (what people
+`deploy.sh` uploads the stable alias `tzohar-installer-android.exe` (what people
 download) and a versioned copy to the backend `downloads/`.
 
 ## Notes / limitations
 
-- The `.exe` is **unsigned** → SmartScreen/AV will warn on first run, same as
-  the Windows agent. A CA-signed build is the real fix.
+- The `.exe` is Authenticode-signed with the **Tzohar publisher certificate** —
+  the same self-signed cert and the same `sign.ps1` the Windows agent uses
+  (`release.sh` signs it on the laptop after cross-compiling). Technicians trust
+  that publisher once per PC via the command on the site's Windows-install
+  steps; until they do, Windows still shows an "unknown publisher" SmartScreen
+  warning (the cert is self-signed, so it earns no Microsoft reputation, and it
+  does not satisfy Smart App Control). A CA-issued cert is the real fix.
 - USB debugging + the RSA prompt are irreducibly manual — Android's security
   model. The wizard guides and detects them but cannot skip them.
 - Android 10 has no accessibility screen-capture path, so capture there still
