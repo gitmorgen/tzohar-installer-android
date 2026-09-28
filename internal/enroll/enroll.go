@@ -34,7 +34,7 @@ type Enrollment struct {
 }
 
 // enr_ ids are "enr_" + 96 bits of hex (24 chars); see enrollmentStore.mint.
-var enrIDRe = regexp.MustCompile(`enr_[a-f0-9]{24}`)
+var enrIDRe = regexp.MustCompile(`(?i)enr_[a-f0-9]{24}`)
 
 // rawKeyRe is a lenient shape for a hand-typed install key (letters/digits,
 // optionally dash-grouped). Only used when no enr_ id is present.
